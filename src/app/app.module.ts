@@ -4,23 +4,18 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, provideHttpClient, withFetch } from '@angular/common/http';
-import { WeatherDashboardComponent } from './components/weather-dashboard/weather-dashboard.component';
-import {MainComponent} from './components/main/main.component';
-import {FooterComponent} from './components/footer/footer.component';
+import { WeatherComponent } from './components/weather/weather.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    WeatherComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserModule,
     HttpClientModule,
     FormsModule,
-    WeatherDashboardComponent,
-    MainComponent,
-    FooterComponent,
   ],
   providers: [
     provideClientHydration(),
