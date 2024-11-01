@@ -2,7 +2,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { WordService } from '../../services/word.service';
+import { WordService } from '../../services/wordService/word.service';
 
 @Component({
   selector: 'app-wordlist',
