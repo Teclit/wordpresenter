@@ -1,0 +1,49 @@
+<div class="weather-dashboard">
+  <h2>Weather Dashboard</h2>
+
+  <!-- Inputs for Latitude and Longitude -->
+  <input [(ngModel)]="lat" placeholder="Latitude" />
+  <input [(ngModel)]="lon" placeholder="Longitude" />
+  <button (click)="getWeather()">Get Weather</button>
+
+  <!-- Customize Weather Data Display -->
+  <div class="customize">
+    <h3>Customize Display</h3>
+    <label>
+      Temperature Unit:
+      <select [(ngModel)]="temperatureUnit">
+        <option value="C">Celsius</option>
+        <option value="F">Fahrenheit</option>
+      </select>
+    </label>
+    <label>
+      Wind Speed Unit:
+      <select [(ngModel)]="windSpeedUnit">
+        <option value="m/s">m/s</option>
+        <option value="km/h">km/h</option>
+        <option value="mph">mph</option>
+      </select>
+    </label>
+  </div>
+
+  <!-- Display Daily Weather Data -->
+  <div *ngIf="dailyData">
+    <h3>Location: {{ weatherData?.location?.lat }}, {{ weatherData?.location?.lon }}</h3>
+    <p><strong>Date:</strong> {{ weatherData?.timelines?.daily[0]?.time | date:'fullDate' }}</p>
+    <p><strong>Temperature:</strong> {{ convertTemperature(dailyData.temperatureAvg) }} °{{ temperatureUnit }} (Max: {{ convertTemperature(dailyData.temperatureMax) }} °{{ temperatureUnit }}, Min: {{ convertTemperature(dailyData.temperatureMin) }} °{{ temperatureUnit }})</p>
+    <p><strong>Humidity:</strong> {{ dailyData.humidityAvg }}% (Max: {{ dailyData.humidityMax }}%, Min: {{ dailyData.humidityMin }}%)</p>
+    <p><strong>Wind Speed:</strong> Avg {{ convertWindSpeed(dailyData.windSpeedAvg) }} {{ windSpeedUnit }} (Max: {{ convertWindSpeed(dailyData.windSpeedMax) }} {{ windSpeedUnit }})</p>
+    <p><strong>Sunrise:</strong> {{ dailyData.sunriseTime | date:'shortTime' }}</p>
+    <p><strong>Sunset:</strong> {{ dailyData.sunsetTime | date:'shortTime' }}</p>
+  </div>
+
+  <!-- List of Weather Data Entries -->
+  <div class="weather-list">
+    <h3>Weather Data List</h3>
+    <ul>
+      <li *ngFor="let entry of weatherDataList">
+        {{ entry.date | date:'fullDate' }}: {{ convertTemperature(entry.temperature) }} °{{ temperatureUnit }}
+      </li>
+    </ul>
+  </div>
+</div>
