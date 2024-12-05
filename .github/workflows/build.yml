@@ -43,7 +43,7 @@ jobs:
     timeout-minutes: 03 # Set a timeout of 30 minutes for the deploy job
 
     steps:
-      - name: Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v3
 
       - name: Log in to Docker Hub
@@ -52,9 +52,20 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Build and push Docker image
-        uses: docker/build-push-action@v4
-        with:
-          context: .
-          push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/wordpresenter:latest # Updated Docker image name
+      - name: Extract Git metadata
+        id: vars
+        run: |
+          echo "BRANCH_NAME=${GITHUB_REF#refs/heads/}" >> $GITHUB_ENV
+          echo "COMMIT_SHA=${GITHUB_SHA::7}" >> $GITHUB_ENV
+
+      - name: Build Docker image
+        run: docker build -t teclit/wordpresenter:${{ env.BRANCH_NAME }}-${{ env.COMMIT_SHA }} .
+
+      - name: Tag Docker image as latest
+        run: docker tag teclit/wordpresenter:${{ env.BRANCH_NAME }}-${{ env.COMMIT_SHA }} teclit/wordpresenter:latest
+
+      - name: Push Docker image to Docker Hub with dynamic tag
+        run: docker push teclit/wordpresenter:${{ env.BRANCH_NAME }}-${{ env.COMMIT_SHA }}
+
+      - name: Push Docker image to Docker Hub with latest tag
+        run: docker push teclit/wordpresenter:latest
