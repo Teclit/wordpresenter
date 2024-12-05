@@ -1,14 +1,16 @@
-/* You can add global styles to this file, and also import other style files */
-html, body {
-  height: 100%;
-}
-
 body {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  min-height: 100vh;
+  margin: 0;
 }
 
-.footer {
-  margin-top: auto;
+main {
+  flex: 1; 
+  min-height: 75vh;/* Pushes the footer to the bottom */
+}
+
+footer {
+  background-color: #343a40; /* Same as bg-dark */
+  color: white;
 }
