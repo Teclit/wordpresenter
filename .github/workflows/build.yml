@@ -13,6 +13,8 @@ jobs:
       matrix:
         node-version: [ 18.x, 20.x ] # Removed outdated Node.js versions and kept stable ones for Angular 19 compatibility.
 
+    timeout-minutes: 03 # Set a timeout of 30 minutes for the build job
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -29,7 +31,7 @@ jobs:
         run: npm run build
 
       - name: Run tests
-        run: npm test
+        run: npm test # Removed the --verbose argument
 
       - name: Custom step
         run: echo "Custom CI step completed"
@@ -37,6 +39,8 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
+
+    timeout-minutes: 03 # Set a timeout of 30 minutes for the deploy job
 
     steps:
       - name: Checkout repository
