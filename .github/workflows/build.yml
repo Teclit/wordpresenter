@@ -31,7 +31,7 @@ jobs:
         run: npm run build
 
       - name: Run tests
-        run: npm test # Removed the --verbose argument
+        run: npm test -- --watch=false
 
       - name: Custom step
         run: echo "Custom CI step completed"

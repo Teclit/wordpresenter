@@ -10,7 +10,7 @@ module.exports = function (config) {
       require('@angular-devkit/build-angular/plugins/karma'),
     ],
     client: {
-      clearContext: false, // Leave Jasmine Spec Runner output visible in browser
+      clearContext: false, // leave Jasmine Spec Runner output visible in browser
     },
     coverageReporter: {
       dir: require('path').join(__dirname, './coverage'),
@@ -21,9 +21,9 @@ module.exports = function (config) {
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,
-    autoWatch: true,
-    browsers: ['ChromeHeadless'], // Use ChromeHeadless instead of Chrome
-    singleRun: false, // Set true for CI environments
-    restartOnFileChange: true,
+    autoWatch: false, // Disable file watching
+    browsers: ['ChromeHeadless'],
+    singleRun: true, // Ensure the server stops after tests complete
+    restartOnFileChange: false, // Disable auto-restarting for CI/CD
   });
 };
