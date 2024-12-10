@@ -11,9 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [ 18.x, 20.x] # Removed outdated Node.js versions and kept stable ones for Angular 19 compatibility.
-
-    timeout-minutes: 03 # Set a timeout of 30 minutes for the build job
+        node-version: [ 18.x, 20.x ] # Removed outdated Node.js versions and kept stable ones for Angular 19 compatibility.
 
     steps:
       - name: Checkout repository
@@ -39,8 +37,6 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
-
-    timeout-minutes: 03 # Set a timeout of 30 minutes for the deploy job
 
     steps:
       - name: Checkout code
