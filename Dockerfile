@@ -1,29 +1,57 @@
-# Use Node.js for building the Angular project
-FROM node:20-alpine AS build
+name: Build and Deploy to Docker Hub
 
-# Set working directory
-WORKDIR /app
+on:
+  push:
+    branches:
+      - '**'
+  pull_request:
+    branches:
+      - '**'
 
-# Copy package.json and package-lock.json for dependency installation
-COPY package*.json ./
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16, 18, 20] # Test on multiple Node.js versions
 
-# Install dependencies
-RUN npm ci
+    steps:
+    # Step 1: Checkout the repository
+    - name: Checkout repository
+      uses: actions/checkout@v3
 
-# Copy the rest of the application source code
-COPY . .
+    # Step 2: Set up Node.js
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
 
-# Build the Angular application
-RUN npm run build -- --output-path=dist/wordpresenter --configuration=production
+    # Step 3: Install dependencies and build the Angular project
+    - name: Install dependencies
+      run: npm ci
 
-# Use Nginx for serving the Angular application
-FROM nginx:stable-alpine
+    - name: Build Angular app
+      run: npm run build -- --output-path=dist/wordpresenter --configuration=production
 
-# Copy the Angular build output to the Nginx directory
-COPY --from=build /app/dist/wordpresenter /usr/share/nginx/html
+  deploy:
+    if: github.ref == 'refs/heads/master' # Only deploy from master branch
+    runs-on: ubuntu-latest
+    needs: build
 
-# Expose port 80
-EXPOSE 80
+    steps:
+    # Step 1: Checkout the repository
+    - name: Checkout repository
+      uses: actions/checkout@v3
 
-# Start Nginx server
-CMD ["nginx", "-g", "daemon off;"]
+    # Step 2: Log in to Docker Hub
+    - name: Log in to Docker Hub
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+
+    # Step 3: Build and push the Docker image
+    - name: Build and push Docker image
+      run: |
+        docker build -t your-dockerhub-username/wordpresenter:latest .
+        docker push your-dockerhub-username/wordpresenter:latest
