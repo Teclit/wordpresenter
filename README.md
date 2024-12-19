@@ -13,7 +13,7 @@ src/
 │   ├── layout/              # Application-wide layout components
 │   │   ├── header/
 │   │   ├── footer/
-│   │   ├── sidebar/
+│   │   ├── maincontainer/
 │   │   └── layout.module.ts
 │   ├── app-routing.module.ts # Root routing configuration
 │   ├── app.module.ts         # Root module
@@ -73,8 +73,8 @@ src/
         │   ├── footer.component.ts
         │   ├── footer.component.html
         ├── sidebar/
-        │   ├── sidebar.component.ts
-        │   ├── sidebar.component.html
+        │   ├── maincontainer.component.ts
+        │   ├── maincontainer.component.html
         └── layout.module.ts
 
 

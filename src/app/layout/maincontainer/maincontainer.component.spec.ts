@@ -1,18 +1,24 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MaincontainerComponent } from './maincontainer.component';
+import { MainContainerComponent } from './maincontainer.component';
+import {InputContainerComponent} from '../inputcontainer/inputcontainer.component';
+import {ShowBoxComponent} from '../showbox/showbox.component';
 
-describe('MaincontainerComponent', () => {
-  let component: MaincontainerComponent;
-  let fixture: ComponentFixture<MaincontainerComponent>;
+describe('MainContainerComponent', () => {
+  let component: MainContainerComponent;
+  let fixture: ComponentFixture<MainContainerComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [MaincontainerComponent]
+      declarations: [
+        MainContainerComponent,
+        InputContainerComponent,
+        ShowBoxComponent
+      ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(MaincontainerComponent);
+    fixture = TestBed.createComponent(MainContainerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
