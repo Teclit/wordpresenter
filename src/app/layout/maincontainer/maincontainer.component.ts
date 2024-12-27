@@ -8,5 +8,9 @@ import { Component } from '@angular/core';
   styleUrl: './maincontainer.component.css'
 })
 export class MainContainerComponent {
+  submittedText: string = '';
 
+  onTextSubmitted(text: string) {
+    this.submittedText = text;
+  }
 }

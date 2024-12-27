@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
 
 @Component({
   selector: 'app-showbox',
@@ -8,5 +8,6 @@ import { Component } from '@angular/core';
   styleUrl: './showbox.component.css'
 })
 export class ShowBoxComponent {
+  @Input() text: string = '';
 
 }

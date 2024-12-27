@@ -1,4 +1,4 @@
 <div class="row">
-  <app-inputcontainer></app-inputcontainer>
-  <app-showbox></app-showbox>
+  <app-inputcontainer (textSubmitted)="onTextSubmitted($event)"></app-inputcontainer>
+  <app-showbox [text]="submittedText"></app-showbox>
 </div>

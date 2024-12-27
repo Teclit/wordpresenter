@@ -1,16 +1,16 @@
-body {
+html, body {
+  height: 100%;
+  margin: 0;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
-  margin: 0;
 }
 
-main {
-  flex: 1; 
-  min-height: 75vh;/* Pushes the footer to the bottom */
+body {
+  overflow: hidden;
 }
 
-footer {
-  background-color: #343a40; /* Same as bg-dark */
-  color: white;
+app-root {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
