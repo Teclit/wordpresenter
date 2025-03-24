@@ -8,6 +8,6 @@ import {Component, Input} from '@angular/core';
   styleUrl: './showbox.component.css'
 })
 export class ShowBoxComponent {
-  @Input() text: string = '';
+  @Input() result: any = null;
 
 }

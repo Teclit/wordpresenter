@@ -1,19 +1,22 @@
 import { Component, EventEmitter, Output } from '@angular/core';
+import { WordsService } from '../../services/words.service';
 
 @Component({
   selector: 'app-inputcontainer',
   standalone: false,
-
   templateUrl: './inputcontainer.component.html',
-  styleUrl: './inputcontainer.component.css'
+  styleUrls: ['./inputcontainer.component.css'],
 })
 export class InputContainerComponent {
-  @Output() textSubmitted = new EventEmitter<string>();
+  @Output() textSubmitted = new EventEmitter<any>();
   inputText: string = '';
 
-  onSubmit() {
-    this.textSubmitted.emit(this.inputText);
-    this.inputText = '';
-  }
+  constructor(private wordsService: WordsService) {}
 
+  onSubmit() {
+    this.wordsService.analyzeText(this.inputText).subscribe((response) => {
+      this.textSubmitted.emit(response);
+      this.inputText = '';
+    });
+  }
 }

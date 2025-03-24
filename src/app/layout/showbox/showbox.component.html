@@ -1,5 +1,9 @@
-<div class="container">
-  <p class="p-5 border border-dark border-1 fw-lighter text-justify small">
-    {{ text }}
-  </p>
+
+<div class="container p-4 border border-dark border-1 fw-lighter" *ngIf="result">
+  <p> <strong>Word Count:</strong> {{ result.wordCount }}</p>
+  <p> <strong>Character Count:</strong> {{ result.characterCount }}</p>
+  <p><strong>Word List:</strong></p>
+  <ul  class="border-3" >
+      <li *ngFor="let word of result.wordList">{{ word }}</li>
+  </ul>
 </div>

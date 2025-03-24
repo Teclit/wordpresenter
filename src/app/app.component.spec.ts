@@ -6,13 +6,17 @@ import {FooterComponent} from './layout/footer/footer.component';
 import {InputContainerComponent} from './layout/inputcontainer/inputcontainer.component';
 import {MainContainerComponent} from './layout/maincontainer/maincontainer.component';
 import {ShowBoxComponent} from './layout/showbox/showbox.component';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        RouterModule.forRoot([])
+        RouterModule.forRoot([]),
+        FormsModule,
+         HttpClientModule
       ],
       declarations: [
         AppComponent,
